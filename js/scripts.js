@@ -8,7 +8,7 @@ const body = document.querySelector('body');
 const gallery = document.querySelector('.gallery');
 const searchContainer = document.querySelector('search-container');
 const userUrl = 'https://randomuser.me/api/?results=12';
-//let generateUserProfile;
+let generateUserProfile;
 //console.log();
 
 
@@ -25,7 +25,7 @@ const userUrl = 'https://randomuser.me/api/?results=12';
     function userInfo(parseData) {
         console.log(parseData);
         const generateUserProfile = parseData.map((user) => { 
-        `<div class="card">
+        return `<div class="card">
         <div class="card-img-container">
             <img class="card-img" src="${user.picture.large}" alt="profile picture">
         </div>
@@ -35,8 +35,8 @@ const userUrl = 'https://randomuser.me/api/?results=12';
             <p class="card-text cap">${user.location.city}, ${user.location.state}</p>
         </div>
     </div>`;
-    gallery.insertAdjacentHTML('beforeend', generateUserProfile);
         });
+        gallery.insertAdjacentHTML('beforeend', generateUserProfile);
        // console.log(generateUserProfile)
     }
 
