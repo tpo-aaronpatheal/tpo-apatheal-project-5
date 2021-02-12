@@ -3,11 +3,13 @@ the webpage by creating a modal window which displays an image, name, email, cit
 ensure that the modal window can be closed. Will need to utilize regex to correctly format the user's cell number when the information is fetched. */
 
 
-let modalWindow;
+//let modalWindow;
 const body = document.querySelector('body');
 const gallery = document.querySelector('.gallery');
 const searchContainer = document.querySelector('search-container');
 const userUrl = 'https://randomuser.me/api/?results=12&nat=us';
+let index = 0
+let allCards = [];
 //let generateUserProfile;
 //console.log();
 
@@ -17,13 +19,12 @@ const userUrl = 'https://randomuser.me/api/?results=12&nat=us';
 //Fetch request that will request the random users for the page. 
 fetch (userUrl)
   .then((res) => res.json()) //json string
-    //.then(data => console.log(data.results))
   .then(data => {
     userInfo(data.results);
     clickCard(data.results);
+    //closeModalWindow(data.results);
   });
 
-//const users = [];
 function userInfo(parseData) {
         //console.log(parseData);
    const generateUserProfile = parseData.map((user) => { 
@@ -45,6 +46,7 @@ function userInfo(parseData) {
   
     function createModal(user){
       //console.log(user);
+      let employeePhone = formatTelephoneNumber(`${user.phone}`);
       const modal = `
         <div class="modal-container">
         <div class="modal">
@@ -55,7 +57,7 @@ function userInfo(parseData) {
                 <p class="modal-text">${user.email}</p>
                 <p class="modal-text cap">${user.location.city}</p>
                 <hr>
-                <p class="modal-text">${user.phone}</p>
+                <p class="modal-text">${employeePhone}</p>
                 <p class="modal-text">${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
                 <p class="modal-text">Birthday: ${user.dob.date}</p>
             </div>
@@ -66,12 +68,36 @@ function userInfo(parseData) {
     //Event listeners
     function clickCard(employeeInfo){
       let userCards = document.querySelectorAll('.card');
-      userCards.forEach(card => {
-        card.addEventListener('click',(e) => {
-            createModal(employeeInfo[4]);
+      for(let i = 0; i< userCards.length; i++){
+        allCards.push(userCards[i]);
+      }
+      allCards.forEach(card => {
+        card.addEventListener('click',() => {
+            index = allCards.indexOf(card);
+            createModal(employeeInfo[index]);
         });
       });
     }
+
+    //  function closeModalWindow(){
+    //   const closeButton = document.getElementById('modal-close-btn');
+    //   closeButton.addEventListener('click', (e) => {
+    //      if(e.target.value === closeButton){
+    //       document.querySelectorAll(".modal-container").remove();
+    //     }
+    //   });
+    //  }
+
+      //Formatters 
+      const formatTelephoneNumber = (phoneNumber) => {
+        const phone = /^(\d{1,3})(\d{3})(\d{4})$/;
+        return phoneNumber.replace(phone, '$(1) $2-$3');
+      }
+
+    
+
+
+
 
 
     //Helper functions
