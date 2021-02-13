@@ -14,21 +14,19 @@ let allCards = [];
 //console.log();
 
 
-
-
 //Fetch request that will request the random users for the page. 
 fetch (userUrl)
   .then((res) => res.json()) //json string
   .then(data => {
     userInfo(data.results);
     clickCard(data.results);
-    //closeModalWindow(data.results);
   });
+  //.then(() => closeModalWindow());
 
 function userInfo(parseData) {
         //console.log(parseData);
-   const generateUserProfile = parseData.map((user) => { 
-      return `<div class="card">
+    parseData.forEach((user) => { 
+     const card = `<div class="card">
         <div class="card-img-container">
             <img class="card-img" src="${user.picture.large}" alt="profile picture">
         </div>
@@ -38,8 +36,8 @@ function userInfo(parseData) {
             <p class="card-text cap">${user.location.city}, ${user.location.state}</p>
         </div>
     </div>`;
+    gallery.insertAdjacentHTML('beforeend', card);
         });
-      gallery.insertAdjacentHTML('beforeend', generateUserProfile);
        // console.log(generateUserProfile)
     }
 
@@ -64,6 +62,7 @@ function userInfo(parseData) {
         </div>`;
       gallery.insertAdjacentHTML('beforeend', modal);
     }
+       
 
     //Event listeners
     function clickCard(employeeInfo){
@@ -75,18 +74,20 @@ function userInfo(parseData) {
         card.addEventListener('click',() => {
             index = allCards.indexOf(card);
             createModal(employeeInfo[index]);
+            closeModalWindow();
         });
       });
     }
 
-    //  function closeModalWindow(){
-    //   const closeButton = document.getElementById('modal-close-btn');
-    //   closeButton.addEventListener('click', (e) => {
-    //      if(e.target.value === closeButton){
-    //       document.querySelectorAll(".modal-container").remove();
-    //     }
-    //   });
-    //  }
+      function closeModalWindow(){
+      const container = document.querySelector(".modal-container");
+      const closeButton = document.getElementById('modal-close-btn');
+       closeButton.addEventListener('click', (e) => {
+          container.remove();
+          //console.log('test');
+        });
+     }
+
 
       //Formatters 
       const formatTelephoneNumber = (phoneNumber) => {
@@ -108,3 +109,5 @@ function userInfo(parseData) {
           return Promise.reject(new Error(response.statusText))
         }
       }*/
+
+     
