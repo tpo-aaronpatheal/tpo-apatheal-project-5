@@ -36,7 +36,7 @@ function userInfo(parseData) {
     </div>`;
     gallery.insertAdjacentHTML('beforeend', card);
         });
-       // console.log(generateUserProfile)
+       // console.log();
     }
 
   /* The createModal function creates the modal window once a user clicks on an employee. Utilized a template literal for the modal format. Once the
