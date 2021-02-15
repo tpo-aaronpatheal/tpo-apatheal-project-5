@@ -41,7 +41,7 @@ function userInfo(parseData) {
 
   /* The createModal function creates the modal window once a user clicks on an employee. Utilized a template literal for the modal format. Once the
   createModal function is called below in the clickCard function, the modal is appended to the html. I also declared two variables: employeePhone and 
-  employeeDOB. These variables are assigned the values of the format funcitons below for the telephone and DOB. These variables replace the respective 
+  employeeDOB. These variables are assigned the values of the format functions below for the telephone and DOB. These variables replace the respective 
   positions within the template literal. */
     function createModal(user){
       //console.log(user);
@@ -72,7 +72,7 @@ function userInfo(parseData) {
     when calling the createModal function. This ensures that the modal window displays the information for the employee that was clicked. Lastly, the 
     closeModalWindow function adds functionality to the close button that is within the div that is assigned a modal class. Once the user clicks
     the close button, the modal container is removed which will allow for a new one to be created when the user selects a different employee. The 
-    closeModalWindow function is called in the clickCard function  along wtih the createModal function.*/
+    closeModalWindow function is called in the clickCard function along wtih the createModal function.*/
     function clickCard(employeeInfo){
       let userCards = document.querySelectorAll('.card');
       for(let i = 0; i< userCards.length; i++){
