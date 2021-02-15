@@ -1,4 +1,4 @@
-/*Getting started. Will first need to fetch an image, first and las name, email, and city/location from the API. Then will need to add functionality to 
+/*Getting started. Will first need to fetch an image, first and last name, email, and city/location from the API. Then will need to add functionality to 
 the webpage by creating a modal window which displays an image, name, email, city and location, cell number, detailed address, and birthday. Will also need 
 ensure that the modal window can be closed. Will need to utilize regex to correctly format the user's cell number and DOB when the information is fetched. */
 
